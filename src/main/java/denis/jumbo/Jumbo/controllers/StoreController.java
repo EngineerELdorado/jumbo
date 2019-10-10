@@ -45,6 +45,19 @@ public class StoreController {
 
     @GetMapping("/all")
     public ResponseEntity<?>findAll(){
+        JSONParser parser = new JSONParser();
+        try{
+            Object object = parser.parse(resource.getFile().getAbsolutePath());
+            JSONObject jsonObject = (JSONObject)object;
+
+            LOGGER.info(jsonObject);
+
+        }catch (Exception e){
+            // TODO: 09/10/2019 catch exception here.
+            e.printStackTrace();
+            LOGGER.info("EXCEPTION "+e.getLocalizedMessage());
+        }
+
         apiResponse.setResponseCode("00");
         apiResponse.setResponseMessage("All Stores");
         return new ResponseEntity<>(apiResponse, HttpStatus.OK);
