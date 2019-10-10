@@ -43,7 +43,7 @@ public class JumboApplication {
 
 			**/
 			ObjectMapper mapper = new ObjectMapper();
-			mapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY,true);
+			mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false);
 			TypeReference<List<Store>> mapType = new TypeReference<List<Store>>() {};
 			InputStream is = TypeReference.class.getResourceAsStream("/stores.json");
 			try {
@@ -62,6 +62,7 @@ public class JumboApplication {
 				System.out.println("States list saved successfully");
 				//storeService.updateLocations();
 			} catch (IOException e) {
+				System.out.println("Exception");
 				System.out.println(e.getMessage());
 			}
 		};

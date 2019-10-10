@@ -1,6 +1,7 @@
 package denis.jumbo.Jumbo.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.vividsolutions.jts.geom.Geometry;
 import lombok.Data;
 import org.hibernate.annotations.Type;
@@ -12,6 +13,7 @@ import javax.persistence.Id;
 
 @Data
 @Entity(name = "stores")
+@JsonIgnoreProperties(ignoreUnknown = true)
 /**
  * This class is a Representation of each store.
  */
@@ -36,7 +38,6 @@ public class Store {
     private boolean collectionPoint;
     private String sapStoreID;
     private String todayClose;
-
     /**
      * This geometry value is not in our Json file.
      * I am adding it to make the query faster by calculating distances from it.
