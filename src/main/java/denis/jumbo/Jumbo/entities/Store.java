@@ -11,12 +11,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Data
-@Entity
+@Entity(name = "stores")
+/**
+ * This class is a Representation of each store.
+ */
 public class Store {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @JsonIgnore
     private Long id;
     private String city;
     private String postalCode;
@@ -34,6 +36,16 @@ public class Store {
     private boolean collectionPoint;
     private String sapStoreID;
     private String todayClose;
+
+    /**
+     * This geometry value is not in our Json file.
+     * I am adding it to make the query faster by calculating distances from it.
+     */
+
+    @JsonIgnore
     private Geometry location;
 
+    public Store(){
+
+    }
 }

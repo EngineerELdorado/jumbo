@@ -1,9 +1,13 @@
 package denis.jumbo.Jumbo;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.vividsolutions.jts.geom.Geometry;
+import com.vividsolutions.jts.io.ParseException;
 import denis.jumbo.Jumbo.entities.Store;
 import denis.jumbo.Jumbo.services.IStoreService;
+import denis.jumbo.Jumbo.utils.GeoUtils;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -21,6 +25,16 @@ public class JumboApplication {
 		SpringApplication.run(JumboApplication.class, args);
 	}
 
+	/**
+	 * Here I am reading the data from the Json File and storing it to the Database.
+	 * We could just use the plain file to process the closest stores.
+	 * But that approach would take big linear time complexity.
+	 * Of course our aim is to make the user experience as great as possible.
+	 * So we can fetch stores from the DB instead and have a constant time complexity.
+	 * before saving the stores to the Database I am giving it a Geometry value for future queries.
+	 * @param storeService
+	 * @return
+	 */
 	@Bean
 	CommandLineRunner runner(IStoreService storeService) {
 		return args -> {
@@ -29,15 +43,24 @@ public class JumboApplication {
 
 			**/
 			ObjectMapper mapper = new ObjectMapper();
+			mapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY,true);
 			TypeReference<List<Store>> mapType = new TypeReference<List<Store>>() {};
 			InputStream is = TypeReference.class.getResourceAsStream("/stores.json");
 			try {
 				List<Store> stateList = mapper.readValue(is, mapType);
 				stateList.stream().forEach(x->{
-                   // x.setLocation(null);
+
+					Geometry geometry = null;
+					try {
+						geometry = GeoUtils.wktToGeometry(String.format("POINT (%s %s)",String.valueOf( x.getLatitude()), String.valueOf(x.getLongitude())));
+					} catch (ParseException e) {
+						e.printStackTrace();
+					}
+					x.setLocation(geometry);
 					storeService.save(x);
 				});
 				System.out.println("States list saved successfully");
+				//storeService.updateLocations();
 			} catch (IOException e) {
 				System.out.println(e.getMessage());
 			}

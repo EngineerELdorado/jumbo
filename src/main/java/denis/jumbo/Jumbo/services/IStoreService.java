@@ -8,9 +8,12 @@ import java.util.List;
 
 public interface IStoreService {
 
-    void saveAll(List<Store> stores);
+    /**
+     * This is just a contract.
+     * It means the classes implementing this service should respect the contract by
+     * implementing all the methods
+     * @param store
+     */
     void save(Store store);
     Collection<Store> findClosest(UserLocation userLocation);
-    Collection<Store>findAll();
-    void updateLocations();
 }

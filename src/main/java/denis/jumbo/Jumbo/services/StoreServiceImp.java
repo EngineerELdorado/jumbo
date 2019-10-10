@@ -9,22 +9,35 @@ import org.springframework.stereotype.Service;
 import java.util.Collection;
 import java.util.List;
 
+/**
+ * This class is an implementation of our StoreService.
+ * It respects the contract by implementing all the methods.
+ * This is where I put all the logics of the applciation.
+ *
+ */
 @Service
 public class StoreServiceImp implements IStoreService {
 
+    /**
+     * Creating an instance of our Store repository.
+     * more details about the repository is found in the Repository class
+     */
     @Autowired
     StoreRepository storeRepository;
-
-    @Override
-    public void saveAll(List<Store> stores) {
-        storeRepository.saveAll(stores);
-    }
 
     @Override
     public void save(Store store) {
         storeRepository.save(store);
     }
 
+    /**
+     * This method takes an parameter of type userLocation from the controller.
+     * it extracts the latitude and logintude and send them to the repository.
+     * The repository will query the Database, get the response, send it to this class then
+     * this class will send the response back to the controller.
+     * @param userLocation
+     * @return
+     */
     @Override
     public Collection<Store> findClosest(UserLocation userLocation) {
 
@@ -33,14 +46,4 @@ public class StoreServiceImp implements IStoreService {
         return storeRepository.findCloses(longitude,latitude);
     }
 
-    @Override
-    public Collection<Store> findAll() {
-        return storeRepository.findAll();
-    }
-
-    @Override
-    public void updateLocations() {
-
-        storeRepository.updateLocations();
-    }
 }
