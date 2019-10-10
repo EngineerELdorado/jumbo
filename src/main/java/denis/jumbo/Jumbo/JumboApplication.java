@@ -2,7 +2,6 @@ package denis.jumbo.Jumbo;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.vividsolutions.jts.geom.Geometry;
 import denis.jumbo.Jumbo.entities.Store;
 import denis.jumbo.Jumbo.services.IStoreService;
 import org.springframework.boot.CommandLineRunner;
@@ -35,7 +34,7 @@ public class JumboApplication {
 			try {
 				List<Store> stateList = mapper.readValue(is, mapType);
 				stateList.stream().forEach(x->{
-                    x.setLocation(null);
+                   // x.setLocation(null);
 					storeService.save(x);
 				});
 				System.out.println("States list saved successfully");

@@ -1,8 +1,6 @@
 package denis.jumbo.Jumbo.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.vividsolutions.jts.geom.Geometry;
-import com.vividsolutions.jts.geom.Point;
 import lombok.Data;
 import org.hibernate.annotations.Type;
 
@@ -35,6 +33,6 @@ public class Store {
     private boolean collectionPoint;
     private String sapStoreID;
     private String todayClose;
-    private Geometry location;
+    //private Geometry location;
 
 }
