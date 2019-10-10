@@ -36,4 +36,9 @@ public class StoreServiceImp implements IStoreService {
     public List<Store> findAll() {
         return storeRepository.findAll();
     }
+
+    @Override
+    public void updateLocations() {
+        storeRepository.updateLocations();
+    }
 }

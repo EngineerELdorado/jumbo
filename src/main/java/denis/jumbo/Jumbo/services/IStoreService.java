@@ -11,4 +11,5 @@ public interface IStoreService {
     void save(Store store);
     List<Store> findClosest(UserLocation userLocation);
     List<Store>findAll();
+    void updateLocations();
 }
