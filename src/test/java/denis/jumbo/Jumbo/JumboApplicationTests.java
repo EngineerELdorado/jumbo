@@ -10,12 +10,10 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class JumboApplicationTests {
-	@Autowired
-	StoreController storeController;
 	@Test
 	public void contextLoads() {
 
-		storeController.findAll();
+		//storeController.findAll();
 	}
 
 }

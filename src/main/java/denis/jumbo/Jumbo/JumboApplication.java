@@ -2,7 +2,7 @@ package denis.jumbo.Jumbo;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.vividsolutions.jts.geom.Point;
+import com.vividsolutions.jts.geom.Geometry;
 import denis.jumbo.Jumbo.entities.Store;
 import denis.jumbo.Jumbo.services.IStoreService;
 import org.springframework.boot.CommandLineRunner;
@@ -13,6 +13,7 @@ import org.springframework.context.annotation.Bean;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @SpringBootApplication
 public class JumboApplication {
@@ -29,18 +30,17 @@ public class JumboApplication {
 
 			**/
 			ObjectMapper mapper = new ObjectMapper();
-			TypeReference<List<Store>> typeReference = new TypeReference<List<Store>>(){};
-			InputStream inputStream = TypeReference.class.getResourceAsStream("stores.json");
+			TypeReference<List<Store>> mapType = new TypeReference<List<Store>>() {};
+			InputStream is = TypeReference.class.getResourceAsStream("/stores.json");
 			try {
-				List<Store> stores = mapper.readValue(inputStream,typeReference);
-				for (Store store: stores){
-
-					store.setLocation(new Point(null,null));
-				}
-				storeService.save(stores);
-				System.out.println("Stores Saved!");
-			} catch (IOException e){
-				System.out.println("Exception: " + e.getMessage());
+				List<Store> stateList = mapper.readValue(is, mapType);
+				stateList.stream().forEach(x->{
+                    x.setLocation(null);
+					storeService.save(x);
+				});
+				System.out.println("States list saved successfully");
+			} catch (IOException e) {
+				System.out.println(e.getMessage());
 			}
 		};
 	}

@@ -1,5 +1,7 @@
 package denis.jumbo.Jumbo.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.vividsolutions.jts.geom.Geometry;
 import com.vividsolutions.jts.geom.Point;
 import lombok.Data;
 import org.hibernate.annotations.Type;
@@ -15,6 +17,7 @@ public class Store {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @JsonIgnore
     private Long id;
     private String city;
     private String postalCode;
@@ -26,13 +29,12 @@ public class Store {
     private Double latitude;
     private Double longitude;
     private String complexNumber;
-    private boolean showWarningNumber;
+    private boolean showWarningMessage;
     private String todayOpen;
     private String locationType;
     private boolean collectionPoint;
     private String sapStoreID;
     private String todayClose;
-    @Type(type="org.hibernate.spatial.GeometryType")
-    private Point location;
+    private Geometry location;
 
 }

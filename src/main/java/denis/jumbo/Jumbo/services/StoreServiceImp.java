@@ -15,8 +15,13 @@ public class StoreServiceImp implements IStoreService {
     StoreRepository storeRepository;
 
     @Override
-    public void save(List<Store> stores) {
+    public void saveAll(List<Store> stores) {
         storeRepository.saveAll(stores);
+    }
+
+    @Override
+    public void save(Store store) {
+        storeRepository.save(store);
     }
 
     @Override

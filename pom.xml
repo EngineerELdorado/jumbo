@@ -16,6 +16,7 @@
 
 	<properties>
 		<java.version>1.8</java.version>
+<!--		<hibernate.version>4.3</hibernate.version>-->
 	</properties>
 
 	<dependencies>
@@ -53,13 +54,12 @@
 			<optional>true</optional>
 		</dependency>
 		<dependency>
-			<groupId>com.googlecode.json-simple</groupId>
-			<artifactId>json-simple</artifactId>
-			<version>1.1.1</version>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-databind</artifactId>
+			<artifactId>jackson-core</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -67,17 +67,20 @@
 			<scope>test</scope>
 		</dependency>
 
-		<!-- Hibernate Spatial -->
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>9.3-1102-jdbc41</version>
+		</dependency>
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-spatial</artifactId>
-			<version>4.0</version>
-		</dependency>
-
-		<dependency>
-			<groupId>postgresql</groupId>
-			<artifactId>postgresql</artifactId>
-			<version>8.4-701.jdbc3</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>postgresql</artifactId>
+					<groupId>postgresql</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 	</dependencies>
 
@@ -89,7 +92,6 @@
 			</plugin>
 		</plugins>
 	</build>
-	<!-- add repositories for JTS and Hibernate Spatial and Hibernate (JBoss) -->
 	<repositories>
 		<repository>
 			<id>OSGEO GeoTools repo</id>
@@ -99,10 +101,6 @@
 			<id>Hibernate Spatial repo</id>
 			<url>http://www.hibernatespatial.org/repository</url>
 		</repository>
-		<!-- add JBOSS repository for easy access to Hibernate libraries -->
-		<repository>
-			<id>JBOSS</id>
-			<url>https://repository.jboss.org/nexus/content/repositories/releases/</url>
-		</repository>
+
 	</repositories>
 </project>

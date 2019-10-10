@@ -7,7 +7,8 @@ import java.util.List;
 
 public interface IStoreService {
 
-    void save(List<Store> stores);
+    void saveAll(List<Store> stores);
+    void save(Store store);
     List<Store> findClosest(UserLocation userLocation);
     List<Store>findAll();
 }
