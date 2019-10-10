@@ -38,8 +38,6 @@ public class JumboApplication {
 					storeService.save(x);
 				});
 				System.out.println("States list saved successfully");
-				storeService.updateLocations();;
-				System.out.println("locations updated");
 			} catch (IOException e) {
 				System.out.println(e.getMessage());
 			}

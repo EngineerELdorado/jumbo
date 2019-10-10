@@ -6,6 +6,7 @@ import denis.jumbo.Jumbo.repositories.StoreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -25,20 +26,21 @@ public class StoreServiceImp implements IStoreService {
     }
 
     @Override
-    public List<Store> findClosest(UserLocation userLocation) {
+    public Collection<Store> findClosest(UserLocation userLocation) {
 
-
-
-        return null;
+        Double latitude = userLocation.getLatitude();
+        Double longitude = userLocation.getLongitude();
+        return storeRepository.findCloses(longitude,latitude);
     }
 
     @Override
-    public List<Store> findAll() {
+    public Collection<Store> findAll() {
         return storeRepository.findAll();
     }
 
     @Override
     public void updateLocations() {
+
         storeRepository.updateLocations();
     }
 }
