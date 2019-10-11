@@ -73,7 +73,7 @@ public class JumboApplication {
     @Scheduled(fixedRate = 600000)
     public void keepServerAlive(){
 
-        final String uri = "https://jumbo-store.herokuapp.com";
+        final String uri = "https://jumbo-store.herokuapp.com/keeServerAlive/";
 
         RestTemplate restTemplate = new RestTemplate();
         String result = restTemplate.getForObject(uri, String.class);
