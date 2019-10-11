@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * This is just an endpoint to help me keep my heroku server alive.
  * I am using the free version of Heroku and after 30 min of inactivity it sleeps.
- * Thos after every 10 min, I am hitting this endpoint just to make the app continue running
+ * So after every 10 min, I am hitting this endpoint just to make the app continue running
  */
 
 @RequestMapping("/keeServerAlive")
