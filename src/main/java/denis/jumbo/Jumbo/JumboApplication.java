@@ -21,7 +21,6 @@ import org.springframework.web.client.RestTemplate;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @SpringBootApplication
 @EnableScheduling
@@ -68,7 +67,6 @@ public class JumboApplication {
 					storeService.save(x);
 				});
 				System.out.println("States list saved successfully");
-				//storeService.updateLocations();
 			} catch (IOException e) {
 				System.out.println("Exception");
 				System.out.println(e.getMessage());

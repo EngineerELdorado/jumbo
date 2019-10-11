@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = "*")
 public class StoreController {
 
-    Logger LOGGER = LogManager.getLogger(StoreController.class);
     ApiResponse apiResponse = new ApiResponse();
 
     /**
