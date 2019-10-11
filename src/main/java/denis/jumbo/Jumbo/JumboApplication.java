@@ -12,6 +12,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -67,4 +69,14 @@ public class JumboApplication {
 			}
 		};
 	}
+
+    @Scheduled(fixedRate = 600000)
+    public void keepServerAlive(){
+
+        final String uri = "https://jumbo-store.herokuapp.com";
+
+        RestTemplate restTemplate = new RestTemplate();
+        String result = restTemplate.getForObject(uri, String.class);
+
+    }
 }
