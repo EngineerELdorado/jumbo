@@ -8,10 +8,13 @@ import com.vividsolutions.jts.io.ParseException;
 import denis.jumbo.Jumbo.entities.Store;
 import denis.jumbo.Jumbo.services.IStoreService;
 import denis.jumbo.Jumbo.utils.GeoUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.client.RestTemplate;
 
@@ -21,7 +24,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @SpringBootApplication
+@EnableScheduling
 public class JumboApplication {
+
+	Logger LOG = LogManager.getLogger(JumboApplication.class);
 
 	public static void main(String[] args) {
 		SpringApplication.run(JumboApplication.class, args);
@@ -77,6 +83,6 @@ public class JumboApplication {
 
         RestTemplate restTemplate = new RestTemplate();
         String result = restTemplate.getForObject(uri, String.class);
-
+        LOG.info("KEEPING THE SERVER ALIVE");
     }
 }
