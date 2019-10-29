@@ -24,6 +24,7 @@ public class Phone {
     private String manufacturer_name;
     private String category_name;
     private String vendor_type;
+    private String vendor_name;
     private String vendor_country;
     private String vendor_city;
     private String vendor_area;

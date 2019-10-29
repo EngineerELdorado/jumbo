@@ -5,16 +5,15 @@ import com.vividsolutions.jts.io.ParseException;
 import denis.jumbo.Jumbo.entities.Phone;
 import denis.jumbo.Jumbo.entities.Vendor;
 import denis.jumbo.Jumbo.models.ApiResponse;
+import denis.jumbo.Jumbo.models.UserLocation;
 import denis.jumbo.Jumbo.services.IVendorService;
 import denis.jumbo.Jumbo.services.IphoneService;
 import denis.jumbo.Jumbo.utils.GeoUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 
@@ -44,6 +43,27 @@ public class PhoneController {
         apiResponse.setResponseCode("00");
         apiResponse.setResponseMessage("Phone saved");
         return new ResponseEntity<>(apiResponse, HttpStatus.OK);
+    }
+
+    @GetMapping("/closest")
+    ResponseEntity<?>findClosest(@RequestBody UserLocation userLocation,
+                                 @RequestParam int page,@RequestParam int size,
+                                 @RequestParam String param){
+
+   Page<Phone> phones = iphoneService.findClosest(userLocation, page, size, param);
+   apiResponse.setData(phones);
+   return  new ResponseEntity<>(apiResponse, HttpStatus.OK);
+    }
+
+
+    @GetMapping("/by-business/{businessId}")
+    ResponseEntity<?>findBusiness(@RequestBody UserLocation userLocation,
+                                 int page, int size, String param,@PathVariable Long businessId){
+
+        Page<Phone> phones = iphoneService.findByVendor(userLocation, page, size, param, businessId);
+
+        apiResponse.setData(phones);
+        return  new ResponseEntity<>(apiResponse, HttpStatus.OK);
     }
 
 
