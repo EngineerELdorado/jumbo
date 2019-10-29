@@ -1,13 +1,12 @@
 package denis.jumbo.Jumbo.services;
 
-import denis.jumbo.Jumbo.entities.Store;
+import denis.jumbo.Jumbo.entities.Vendor;
 import denis.jumbo.Jumbo.models.UserLocation;
 import denis.jumbo.Jumbo.repositories.StoreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
-import java.util.List;
 
 /**
  * This class is an implementation of our StoreService.
@@ -26,8 +25,8 @@ public class StoreServiceImp implements IStoreService {
     StoreRepository storeRepository;
 
     @Override
-    public void save(Store store) {
-        storeRepository.save(store);
+    public void save(Vendor vendor) {
+        storeRepository.save(vendor);
     }
 
     /**
@@ -39,7 +38,7 @@ public class StoreServiceImp implements IStoreService {
      * @return
      */
     @Override
-    public Collection<Store> findClosest(UserLocation userLocation) {
+    public Collection<Vendor> findClosest(UserLocation userLocation) {
 
         Double latitude = userLocation.getLatitude();
         Double longitude = userLocation.getLongitude();

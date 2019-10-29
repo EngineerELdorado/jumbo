@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vividsolutions.jts.geom.Geometry;
 import com.vividsolutions.jts.io.ParseException;
-import denis.jumbo.Jumbo.entities.Store;
+import denis.jumbo.Jumbo.entities.Vendor;
 import denis.jumbo.Jumbo.services.IStoreService;
 import denis.jumbo.Jumbo.utils.GeoUtils;
 import org.apache.logging.log4j.LogManager;
@@ -51,10 +51,10 @@ public class JumboApplication {
 			**/
 			ObjectMapper mapper = new ObjectMapper();
 			mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false);
-			TypeReference<List<Store>> mapType = new TypeReference<List<Store>>() {};
+			TypeReference<List<Vendor>> mapType = new TypeReference<List<Vendor>>() {};
 			InputStream is = TypeReference.class.getResourceAsStream("/stores.json");
 			try {
-				List<Store> stateList = mapper.readValue(is, mapType);
+				List<Vendor> stateList = mapper.readValue(is, mapType);
 				stateList.stream().forEach(x->{
 
 					Geometry geometry = null;
