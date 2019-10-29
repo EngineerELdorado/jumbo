@@ -5,7 +5,7 @@ import denis.jumbo.Jumbo.models.UserLocation;
 
 import java.util.Collection;
 
-public interface IStoreService {
+public interface IVendorService {
 
     /**
      * This is just a contract.
@@ -15,4 +15,5 @@ public interface IStoreService {
      */
     void save(Vendor vendor);
     Collection<Vendor> findClosest(UserLocation userLocation);
+    Vendor findById(Long id);
 }

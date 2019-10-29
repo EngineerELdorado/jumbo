@@ -15,7 +15,7 @@ import java.util.Collection;
  *
  */
 @Service
-public class StoreServiceImp implements IStoreService {
+public class VendorServiceImp implements IVendorService {
 
     /**
      * Creating an instance of our Store repository.
@@ -43,6 +43,11 @@ public class StoreServiceImp implements IStoreService {
         Double latitude = userLocation.getLatitude();
         Double longitude = userLocation.getLongitude();
         return storeRepository.findCloses(longitude,latitude);
+    }
+
+    @Override
+    public Vendor findById(Long id) {
+        return storeRepository.getOne(id);
     }
 
 }

@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.Date;
 
 @Data
 @Entity(name = "vendors")
@@ -32,6 +33,8 @@ public class Vendor {
     private String image;
     @JsonIgnore
     private Geometry location;
+    private Long creationTime;
+    private Date creationDate;
 
     public Vendor(){
 

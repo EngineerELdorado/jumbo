@@ -3,10 +3,13 @@ package denis.jumbo.Jumbo.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.vividsolutions.jts.geom.Geometry;
+import lombok.Data;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity(name = "phones")
+@Data
 public class Phone {
 
     @Id
@@ -30,4 +33,6 @@ public class Phone {
     private String image;
     @JsonIgnore
     private Geometry vendor_location;
+    private Long creationTime;
+    private Date creationDate;
 }

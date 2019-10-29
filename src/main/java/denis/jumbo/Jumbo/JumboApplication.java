@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vividsolutions.jts.geom.Geometry;
 import com.vividsolutions.jts.io.ParseException;
 import denis.jumbo.Jumbo.entities.Vendor;
-import denis.jumbo.Jumbo.services.IStoreService;
+import denis.jumbo.Jumbo.services.IVendorService;
 import denis.jumbo.Jumbo.utils.GeoUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -43,7 +43,7 @@ public class JumboApplication {
 	 * @return
 	 */
 	@Bean
-	CommandLineRunner runner(IStoreService storeService) {
+	CommandLineRunner runner(IVendorService storeService) {
 		return args -> {
 			/*
                  Here, I am reading the data from the Json file and writing it to the Database.
