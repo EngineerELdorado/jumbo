@@ -8,7 +8,6 @@ import denis.jumbo.Jumbo.models.ApiResponse;
 import denis.jumbo.Jumbo.models.UserLocation;
 import denis.jumbo.Jumbo.services.IVendorService;
 import denis.jumbo.Jumbo.services.IphoneService;
-import denis.jumbo.Jumbo.utils.GeoUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -57,14 +56,36 @@ public class PhoneController {
 
 
     @GetMapping("/by-business/{businessId}")
-    ResponseEntity<?>findBusiness(@RequestBody UserLocation userLocation,
+    ResponseEntity<?>findBusiness(
                                  int page, int size, String param,@PathVariable Long businessId){
 
-        Page<Phone> phones = iphoneService.findByVendor(userLocation, page, size, param, businessId);
+        Page<Phone> phones = iphoneService.findByVendor( page, size, param, businessId);
 
         apiResponse.setData(phones);
         return  new ResponseEntity<>(apiResponse, HttpStatus.OK);
     }
 
+    @GetMapping("/findByCheapest")
+    public ResponseEntity<?>findByCheapest(@RequestBody UserLocation userLocation,
+                                          @RequestParam int page,@RequestParam int size,@RequestParam String param){
+        Page<Phone>phones = iphoneService.findByCheapest(userLocation, page, size, param);
+        apiResponse.setData(phones);
+        return new ResponseEntity<>(apiResponse, HttpStatus.OK);
+    }
+
+    @GetMapping("/findByMostExpensive")
+    public ResponseEntity<?>findByMostExpensive(@RequestBody UserLocation userLocation,
+                                           @RequestParam int page,@RequestParam int size,@RequestParam String param){
+        Page<Phone>phones = iphoneService.findByCheapest(userLocation, page, size, param);
+        apiResponse.setData(phones);
+        return new ResponseEntity<>(apiResponse, HttpStatus.OK);
+    }
+    @GetMapping("/delete/{id}")
+    public ResponseEntity<?>delete(@PathVariable Long id){
+        iphoneService.delete(id);
+        apiResponse.setResponseCode("00");
+        apiResponse.setResponseMessage("Phone deleted");
+        return new ResponseEntity<>(apiResponse,HttpStatus.OK);
+    }
 
 }

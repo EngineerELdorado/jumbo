@@ -6,10 +6,8 @@ import com.vividsolutions.jts.geom.Geometry;
 import lombok.Data;
 import org.hibernate.annotations.Type;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Collection;
 import java.util.Date;
 
 @Data
@@ -28,13 +26,19 @@ public class Vendor {
     private Double longitude;
     private boolean isOpen;
     private boolean verified;
+    @Column(unique = true)
+    private String username;
     private String phone;
-    private String password;
+    private String pin;
     private String image;
     @JsonIgnore
     private Geometry location;
     private Long creationTime;
     private Date creationDate;
+    private String accountType;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    Collection<Phone>phones;
 
     public Vendor(){
 

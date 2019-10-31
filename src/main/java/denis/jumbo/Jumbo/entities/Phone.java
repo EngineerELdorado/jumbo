@@ -31,6 +31,7 @@ public class Phone {
     private Double vendor_latitude;
     private Double vendor_longitude;
     private boolean vendor_verified;
+    private Double price;
     private String image;
     @JsonIgnore
     private Geometry vendor_location;
